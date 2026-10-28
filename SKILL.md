@@ -47,6 +47,12 @@ Input: a vertical, a metro area, and the profile's ICP notes. Output: a
 ranked prospect list (`prospects.md` + `prospects.csv`) with websites and
 social profiles per prospect.
 
+**Feed the tracker as you find.** Every prospect goes into the tracker the
+moment it is found: POST to http://localhost:8789/api/prospects/bulk with
+status "Found", channel, and handle. They then appear on the tracker page
+automatically (bulk import dedupes on name + handle). If the tracker is not
+running: `node tracker/server.mjs` from the repository folder.
+
 ### Phase 2: Persona (read `skills/outreach/references/persona-template.md`)
 
 Write the campaign persona: product facts, ideal customer profile, voice.
@@ -57,6 +63,10 @@ order.
 
 Draft first-touch messages for the top rows: observation openers grounded in
 something specific to each prospect, no product name in the first touch, one
+goal per message. **As each draft is written, it goes straight into the
+tracker**: POST the prospect with status "Drafted", channel, handle, and the
+full draft text in the `draft` field - the draft is then readable and
+editable on the tracker page, and the human approves it there.
 goal per message. Batch 5-10 drafts per session into `OUTBOX.md`. The human
 approves or edits each one; only approved drafts are sendable, and sending
 happens manually through the candidate's own accounts.

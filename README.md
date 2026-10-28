@@ -55,6 +55,14 @@ statuses (Found, Drafted, Approved, Contacted, Follow-up sent, Replied,
 Meeting, Won, Lost) on the page. One-click JSON export for backups. See
 [tracker/README.md](tracker/README.md).
 
+## Live pipeline
+
+The campaign agent feeds the tracker as it works: every prospect found in a
+scan lands in the tracker with status "Found", and every draft written lands
+with status "Drafted" - readable and editable on the page. Your job is the
+part that stays human: approve drafts, send from your own accounts, flip
+statuses as replies come in.
+
 ## Ethics, briefly
 
 Approval-first by design: the agent never sends anything - you do, from your
