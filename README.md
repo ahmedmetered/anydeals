@@ -1,4 +1,4 @@
-# anyoutbound
+# anydeals
 
 Lead generation and cold outreach as one pipeline, running on the AI agent
 you already have.
@@ -37,8 +37,8 @@ the two sub-skills register individually as well.
 
 | Agent | Folder |
 |---|---|
-| ZCode | `~/.agents/skills/anyoutbound` or `~/.zcode/skills/anyoutbound` |
-| Claude Code | `~/.claude/skills/anyoutbound` |
+| ZCode | `~/.agents/skills/anydeals` or `~/.zcode/skills/anydeals` |
+| Claude Code | `~/.claude/skills/anydeals` |
 | Codex CLI / Cursor / others | your skills discovery path |
 
 Then: "Build me a prospect list for <vertical> in <city>" followed by "draft

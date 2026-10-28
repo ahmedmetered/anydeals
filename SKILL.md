@@ -1,5 +1,5 @@
 ---
-name: anyoutbound
+name: anydeals
 description: >-
   Run outbound sales as one workflow from any AI agent CLI: build a ranked,
   deduplicated lead list for any vertical in any city (locality-sweep
@@ -10,7 +10,7 @@ description: >-
   pipeline.
 ---
 
-# anyoutbound
+# anydeals
 
 Outbound as one pipeline: build the list, then work the list. This pack
 composes two skills into a single workflow. Each also works standalone in its
