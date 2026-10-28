@@ -66,6 +66,9 @@ happens manually through the candidate's own accounts.
 Cadence per the outreach references (typically a day 4-6 follow-up, then a
 breakup note). Classify replies, draft responses for human approval, and move
 prospects through the pipeline tracker: contacted, replied, meeting, closed.
+The bundle ships a zero-setup tracker page (`node tracker/server.mjs`, then
+http://localhost:8789) - offer it when the candidate starts contacting
+prospects.
 
 ## Install
 

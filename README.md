@@ -46,6 +46,15 @@ first touches for the top of the list." See
 [examples/example-campaign.md](examples/example-campaign.md) for a full
 fictional run.
 
+## The tracker
+
+The bundle ships a zero-setup pipeline tracker: `node tracker/server.mjs`,
+then open http://localhost:8789. Prospects live in a JSON file on your disk,
+the campaign agent can add them straight into the pipeline, and you edit
+statuses (Found, Drafted, Approved, Contacted, Follow-up sent, Replied,
+Meeting, Won, Lost) on the page. One-click JSON export for backups. See
+[tracker/README.md](tracker/README.md).
+
 ## Ethics, briefly
 
 Approval-first by design: the agent never sends anything - you do, from your
