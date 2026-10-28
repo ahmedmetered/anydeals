@@ -111,9 +111,9 @@ function render(){
       <div><label>Contacted date</label><input type="date" value="${esc(p.date_contacted||"")}" onchange="patch('${p.id}', {date_contacted: this.value})"></div>
       <div><label>Next action</label><input value="${esc(p.next||"")}" placeholder="e.g. follow-up day 5" onchange="patch('${p.id}', {next: this.value})"></div>
     </div>
-    ${a.draft ? `
+    ${p.draft ? `
     <div class="full"><label>Draft (edit freely, then approve)</label>
-      <textarea onchange="patch('${p.id}', {draft: this.value})">${esc(a.draft)}</textarea></div>` : ""}
+      <textarea onchange="patch('${p.id}', {draft: this.value})">${esc(p.draft)}</textarea></div>` : ""}
     <div class="full"><label>Notes</label><textarea onchange="patch('${p.id}', {notes: this.value})">${esc(p.notes||"")}</textarea></div>
     ${p.status === "Drafted" ? `<div style="margin-top:6px"><button class="gold" onclick="patch('${p.id}', {status: 'Approved'})">Approve - ready to send</button></div>` : ""}
   </div>`;
