@@ -233,7 +233,9 @@ async function refresh(){
   render();
 }
 
+let scrollYBefore = 0;
 function render(){
+  scrollYBefore = window.scrollY;
   const fc = $("f_channel").value;
   const shown = prospects.filter(p => (!statusSel || p.status === statusSel) && (!fc || (p.channel||"") === fc));
 
@@ -262,8 +264,13 @@ function render(){
   }
   const sorted = shown.slice().sort((x,y)=>
     STAGES.indexOf(x.status)-STAGES.indexOf(y.status) || (y.updated||"").localeCompare(x.updated||""));
-  $("list").innerHTML = sorted.map((p,idx) => `
-  <article class="card" style="--i:${Math.min(idx,18)}">
+if (scrollYBefore) requestAnimationFrame(() => window.scrollTo(0, scrollYBefore));
+  $("list").innerHTML = sorted.map((p,idx) => cardHtml(p, idx)).join("");
+}
+
+function cardHtml(p, idx){
+  return `
+  <article class="card" data-id="${p.id}" style="--i:${Math.min(idx,18)}">
     <div class="row1">
       <div>
         <span class="co">${esc(p.name)}</span> · <span class="role">${esc(p.channel||"")}</span>
@@ -294,13 +301,19 @@ function render(){
     <div class="full"><label for="nt-${p.id}">Notes</label><textarea class="ctl" id="nt-${p.id}" onchange="patch('${p.id}', {notes: this.value})">${esc(p.notes||"")}</textarea></div>
     ${p.status === "Drafted" ? `<div class="full"><button class="primary" onclick="patch('${p.id}', {status: 'Approved'})">Approve — ready to send</button></div>` : ""}
     <div class="foot"><span class="updated">updated ${esc(p.updated||"—")}</span></div>
-  </article>`).join("");
+  </article>`;
 }
 
 function setStatus(v){ statusSel = v; render(); }
 async function patch(id, fields){
-  await fetch(`${API}/${id}`, {method:"PATCH", headers:{"content-type":"application/json"}, body: JSON.stringify(fields)});
-  await refresh();
+  const updated = await (await fetch(`${API}/${id}`, {method:"PATCH", headers:{"content-type":"application/json"}, body: JSON.stringify(fields)})).json();
+  const i = prospects.findIndex(p => p.id === id);
+  if (i < 0){ await refresh(); return; }
+  prospects[i] = updated;
+  if ("status" in fields){ await refresh(); return; } // stage moves re-sort the whole list
+  // AD-9: replace only the edited card - no full 807-card re-render
+  const el = document.querySelector('.card[data-id="'+id+'"]');
+  if (el){ el.outerHTML = cardHtml(updated, Math.min(18, i)); }
 }
 function openNew(){ $("newform").classList.add("open"); $("n_name").focus(); }
 async function addProspect(){
