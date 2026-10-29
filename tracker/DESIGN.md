@@ -6,6 +6,10 @@ token system, type scale, spacing, and component conventions are documented
 in [anyjobsearch/tracker/DESIGN.md](../../../../../../projects/anyjobsearch/tracker/DESIGN.md)
 (repo: ahmedmetered/anyjobsearch). This file records the adaptations.
 
+## Appearance (amended 2026-10-30)
+Light default + designed dark, user-toggleable — identical tokens and
+toggle mechanics as the anyjobsearch tracker (see its DESIGN.md).
+
 ## What carries over unchanged
 Apple light appearance, `#F5F5F7` ground + white surfaces separated by
 contrast alone (no card borders/shadows), ink `#1D1D1F`/`#6E6E73`, single

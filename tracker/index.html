@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>anydeals · Outbound Tracker</title>
+<script>
+  (function(){
+    var t = localStorage.getItem("am-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
 <style>
   :root{
     --bg:#F5F5F7; --surface:#FFFFFF;
@@ -12,8 +18,17 @@
     --accent:#0071E3; --accent-press:#0060C0; --accent-soft:rgba(0,113,227,.09);
     --good:#1D7A36; --good-tint:#E6F4EA;
     --danger:#D70015;
-    --track:#E9E9EB;
+    --track:#E9E9EB; --tag-ink:#3C3C43;
     --radius-card:14px; --radius-ctl:980px; --radius-fld:8px;
+  }
+  [data-theme="dark"]{
+    --bg:#0A0A0C; --surface:#17171A; --surface-2:#1D1D21;
+    --ink:#F5F5F7; --ink-2:#A1A1A6; --ink-3:#8E8E93;
+    --hairline:#38383D; --hairline-soft:#2A2A2E;
+    --accent:#0A84FF; --accent-press:#409CFF; --accent-soft:rgba(10,132,255,.16);
+    --good:#30D158; --good-tint:rgba(48,209,88,.14);
+    --danger:#FF453A;
+    --track:#26262A; --tag-ink:#D1D1D6;
   }
   * { box-sizing:border-box; margin:0; padding:0; }
   html { -webkit-text-size-adjust:100%; }
@@ -27,7 +42,7 @@
   input, textarea { caret-color:var(--accent); }
   *:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:6px; }
   ::-webkit-scrollbar { width:11px; height:11px; }
-  ::-webkit-scrollbar-thumb { background:#C7C7CC; border-radius:6px; border:3px solid var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--hairline-strong); border-radius:6px; border:3px solid var(--bg); }
   ::-webkit-scrollbar-track { background:transparent; }
 
   .wrap { max-width:1060px; margin:0 auto; }
@@ -47,8 +62,8 @@
   button:active { transform:scale(.98); }
   button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
   button.primary:hover { background:var(--accent-press); border-color:var(--accent-press); }
-  button.on { background:var(--ink); border-color:var(--ink); color:#fff; font-weight:600; }
-  button.on:hover { background:#000; }
+  button.on { background:var(--ink); border-color:var(--ink); color:var(--surface); font-weight:600; }
+  button.on:hover { background:var(--ink); filter:brightness(.92); }
   button.danger { color:var(--danger); }
 
   .stats { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
@@ -58,8 +73,8 @@
     font-size:13px; color:var(--ink-2);
   }
   .chip b { font-size:16px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; letter-spacing:-0.01em; }
-  .chip.hot { background:var(--ink); color:rgba(255,255,255,.72); }
-  .chip.hot b { color:#fff; }
+  .chip.hot { background:var(--ink); color:var(--surface); }
+  .chip.hot b { color:var(--surface); }
 
   .pipeline { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px; }
   .seg {
@@ -71,8 +86,8 @@
   }
   .seg b { font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
   .seg:hover { border-color:#B9B9C0; background:#FAFAFC; }
-  .seg[aria-pressed="true"] { background:var(--ink); border-color:var(--ink); color:rgba(255,255,255,.75); }
-  .seg[aria-pressed="true"] b { color:#fff; }
+  .seg[aria-pressed="true"] { background:var(--ink); border-color:var(--ink); color:var(--surface); }
+  .seg[aria-pressed="true"] b { color:var(--surface); }
   .seg.none { border-style:dashed; }
   .seg.none b { color:var(--ink-3); font-weight:500; }
 
@@ -110,7 +125,7 @@
   .meta { font-size:12.5px; color:var(--ink-2); margin-top:3px; display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
   .tag {
     display:inline-block; font-size:11px; font-weight:600; letter-spacing:.02em;
-    background:var(--track); color:#3C3C43; border-radius:6px; padding:2px 7px;
+    background:var(--track); color:var(--tag-ink); border-radius:6px; padding:2px 7px;
   }
   .rowbtns { display:flex; gap:6px; flex:none; }
 
@@ -149,6 +164,10 @@
       <p class="sub">Outbound tracker · runs on your machine · prospects live in prospects-data.json next to the server</p>
     </div>
     <div class="masthead-actions">
+      <button id="theme-toggle" onclick="toggleTheme()" aria-label="Switch appearance" style="display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;padding:0;background:transparent;border:none;color:var(--ink-2)">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
       <button class="primary" onclick="openNew()">+ Add prospect</button>
       <button onclick="toggleImport()">Import</button>
       <button onclick="exportJson()">Export backup</button>
@@ -318,6 +337,18 @@ async function exportJson(){
 }
 // populate the add-form status select from the same stage list
 $("n_status").innerHTML = STAGES.map(s=>`<option>${s}</option>`).join("");
+function toggleTheme(){
+  var t = (document.documentElement.dataset.theme === "dark") ? "light" : "dark";
+  document.documentElement.dataset.theme = t;
+  localStorage.setItem("am-theme", t);
+  document.querySelector(".icon-sun").style.display = t === "dark" ? "" : "none";
+  document.querySelector(".icon-moon").style.display = t === "dark" ? "none" : "";
+}
+(function(){
+  var t = document.documentElement.dataset.theme;
+  document.querySelector(".icon-sun").style.display = t === "dark" ? "" : "none";
+  document.querySelector(".icon-moon").style.display = t === "dark" ? "none" : "";
+})();
 refresh();
 </script>
 </body>
