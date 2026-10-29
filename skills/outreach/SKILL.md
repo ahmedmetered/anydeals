@@ -26,8 +26,8 @@ Everything project-specific stays in the project, under `outreach/` (create it i
 - `outreach/persona.md` — sender identity, product facts (the ONLY claims allowed), ICP,
   pricing, objection answers, mailbox status. Use `references/persona-template.md` to
   create it. If it exists, read it first; never invent product claims.
-- `outreach/OUTBOX.md` — the approval queue. Drafts carry `stato:`/`status:` fields the
-  human flips from `draft` to `approved`. Append new batches, never overwrite history.
+- `outreach/OUTBOX.md` — the approval queue. Drafts carry a `status:` field the
+  human flips from `draft` to `approved` (the only approval tokens). Append new batches, never overwrite history.
 - prospect list — any CSV/MD in the repo with company, category/site, city; ask the user
   which list to use if not obvious.
 
@@ -60,4 +60,5 @@ Everything project-specific stays in the project, under `outreach/` (create it i
   status from the user AND a configured mailbox in persona.md.
 - Every draft must pass the self-check in `references/method.md` before queueing
   (word count, one question, subject rules, banned-pattern scan, claims traceability).
-- One follow-up maximum after any "no". Opt-out is permanent, mid-conversation too.
+- After a "no": one polite follow-up maximum, then stop for this campaign.
+  Opt-out and anger/legal are permanent, mid-conversation too.

@@ -1,6 +1,6 @@
 # Replies — handling responses
 
-Classify first, draft second. The user forwards or pastes the reply; you return a draft and update the prospect's OUTBOOK/OUTBOX status.
+Classify first, draft second. The user forwards or pastes the reply; you return a draft and update the prospect's OUTBOX status.
 
 ## Intent classification
 
@@ -8,7 +8,7 @@ Classify first, draft second. The user forwards or pastes the reply; you return 
 - OBJECTION: acknowledge honestly, give ONE proof point from persona.md, ask one question. Never argue.
 - QUESTION: answer it first, completely, then tie back to their situation in one line.
 - WRONG PERSON: thank them, ask for the right name or a forward. Make it effortless.
-- NOT INTERESTED: do not draft. Mark closed. One no is enough; never "circle back".
+- NOT INTERESTED: do not draft now. Mark closed for this campaign: ONE polite follow-up is allowed later (a light check-in, then stop). Opt-out and anger/legal remain permanent.
 - UNSUBSCRIBE / OPT-OUT (any wording): never reply, never save it, mark permanently excluded in the OUTBOX and say so to the user. Non-negotiable.
 - ANGRY / LEGAL / COMPLIANCE (lawyers, spam reports, harassment, GDPR mentions): never reply. Escalate verbatim to the user, mark the prospect closed.
 
